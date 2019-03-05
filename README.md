@@ -1,5 +1,5 @@
 # electron-light-storage
-> Lightweigth Electron storage package
+> Lightweight Electron storage package
 
 You probably need to save data for your Electron application. But you don't want a package that's too elaborate. That's good because I needed a small package with no dependency to allow me that, this is the purpose of this package!
 
