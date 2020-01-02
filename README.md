@@ -1,4 +1,5 @@
 # electron-light-storage
+
 > Lightweight Electron storage package
 
 You probably need to save data for your Electron application. But you don't want a package that's too elaborate. That's good because I needed a small package with no dependency to allow me that, this is the purpose of this package!
@@ -22,27 +23,54 @@ const Storage = require('electron-light-storage');
 const store = new Storage();
 
 // Set storage
-store.set({'say': 'hi Github!'});
+store.set({ say: 'hi Github!' });
 
 // Get storage
 store.get();
-//=> {'say': 'hi Github!'}
+//=> { 'say': 'hi Github!' }
 
-// Reset storage
+// Get storage from name
+store.get('say');
+//=> 'hi Github!'
+
+// Set API just update the previous store with a deep merge, use reset API to remove all
+store.set({ user: 'Toinane' });
+//=> { 'say': 'hi Github!', 'user': 'Toinane' }
+
+// Reset storage (this API delete the file & create new storage file)
 store.reset();
-//=> true
+//=> {}
+```
+
+this API is useful for minimal storage like this configuration object
+
+```json
+{
+    "settings": {
+        "theme": "dark",
+        "tabIndent": 4
+    },
+    "user": {
+        "name": "Toinane",
+        "lastLogin": 1577983073
+    }
+}
 ```
 
 ## API
 
 ### storage.set(data: Object): Object
+
 You have to pass only Object in this method.
 
 ### storage.get(): Object
+
 It will return you the Object saved.
 
 ### storage.reset(): Boolean
+
 It will return a boolean wich is properly reset.
 
 ## Licence
+
 MIT @Toinane

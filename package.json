@@ -1,18 +1,18 @@
 {
-  "name": "electron-light-storage",
-  "version": "1.0.0",
-  "description": "A lightweight Electron storage package",
-  "main": "dist/index.js",
-  "repository": "git@github.com:Toinane/electron-light-storage.git",
-  "author": "Toinane <toinane@crea-that.fr>",
-  "license": "MIT",
-  "scripts": {
-    "test": "electron-mocha index.test.js",
-    "release": "minify index.js > dist/index.js && npm publish ."
-  },
-  "devDependencies": {
-    "electron": "^4.0.7",
-    "electron-mocha": "^6.0.4",
-    "minify": "^4.1.1"
-  }
+    "name": "electron-light-storage",
+    "version": "1.1.0",
+    "description": "A lightweight Electron storage package",
+    "main": "dist/index.js",
+    "repository": "git@github.com:Toinane/electron-light-storage.git",
+    "author": "Toinane <toinane@crea-that.fr>",
+    "license": "MIT",
+    "scripts": {
+        "test": "electron-mocha index.test.js",
+        "release": "minify index.js > dist/index.js && npm publish ."
+    },
+    "devDependencies": {
+        "electron": "^7.1.7",
+        "electron-mocha": "^8.1.2",
+        "minify": "^5.0.0"
+    }
 }
