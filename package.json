@@ -11,7 +11,7 @@
         "release": "minify index.js > dist/index.js && npm publish ."
     },
     "devDependencies": {
-        "electron": "^7.1.7",
+        "electron": "^9.4.0",
         "electron-mocha": "^8.1.2",
         "minify": "^5.0.0"
     }
