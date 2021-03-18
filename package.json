@@ -1,6 +1,6 @@
 {
     "name": "electron-light-storage",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "A lightweight Electron storage package",
     "main": "dist/index.js",
     "repository": "git@github.com:Toinane/electron-light-storage.git",
@@ -11,8 +11,8 @@
         "release": "minify index.js > dist/index.js && npm publish ."
     },
     "devDependencies": {
-        "electron": "^7.1.7",
-        "electron-mocha": "^8.1.2",
-        "minify": "^5.0.0"
+        "electron": "^12.0.1",
+        "electron-mocha": "^10.0.0",
+        "minify": "^7.0.1"
     }
 }
