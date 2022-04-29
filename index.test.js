@@ -1,67 +1,67 @@
-const assert = require('assert');
-const ElectronLightStorage = require('./index');
+const assert = require("assert");
+const ElectronLightStorage = require("./dist/index");
 
 const storage = new ElectronLightStorage();
-const payload = { get: 'should be good.' };
-const secondPayload = { reset: 'old payload' };
-const replacepayload = { get: 'its different now.' };
+const payload = { get: "should be good." };
+const secondPayload = { reset: "old payload" };
+const replacepayload = { get: "its different now." };
 
 // reset any previous storage
 storage.reset();
 
-describe('Set Storage', () => {
-    it('Should throw error when the value is not correct', () => {
+describe("Set Storage", () => {
+    it("Should throw error when the value is not correct", () => {
         assert.throws(
             () => storage.set(1),
-            'TypeError: Excepted `store` to be of type `object`, got number'
+            "TypeError: Excepted `store` to be of type `object`, got number"
         );
         assert.throws(
-            () => storage.set('hello'),
-            'TypeError: Excepted `store` to be of type `object`, got string'
+            () => storage.set("hello"),
+            "TypeError: Excepted `store` to be of type `object`, got string"
         );
         assert.throws(
             () => storage.set(new Array()),
-            'TypeError: Excepted `store` to be of type `object`, got array'
+            "TypeError: Excepted `store` to be of type `object`, got array"
         );
         assert.throws(
             () => storage.set([]),
-            'TypeError: Excepted `store` to be of type `object`, got array'
+            "TypeError: Excepted `store` to be of type `object`, got array"
         );
         assert.throws(
-            () => storage.set(() => 'Hi'),
-            'TypeError: Excepted `store` to be of type `object`, got function'
+            () => storage.set(() => "Hi"),
+            "TypeError: Excepted `store` to be of type `object`, got function"
         );
     });
 
-    it('Should set object', () => {
+    it("Should set object", () => {
         assert.deepEqual(storage.set(payload), payload);
     });
 
-    it('Should get object', () => {
+    it("Should get object", () => {
         assert.deepEqual(storage.get(), payload);
     });
 
-    it('Should get empty object from wrong name', () => {
-        assert.deepEqual(storage.get('wrong'), {});
+    it("Should get empty object from wrong name", () => {
+        assert.deepEqual(storage.get("wrong"), {});
     });
 
-    it('Should get object from name', () => {
-        assert.deepEqual(storage.get('get'), payload.get);
+    it("Should get object from name", () => {
+        assert.deepEqual(storage.get("get"), payload.get);
     });
 
-    it('Should reset object', () => {
+    it("Should reset object", () => {
         assert.deepEqual(storage.get(), payload);
         storage.reset();
         assert.deepEqual(storage.get(), {});
     });
 
-    it('Should add object', () => {
+    it("Should add object", () => {
         storage.set(payload);
         storage.set(secondPayload);
         assert.deepEqual(storage.get(), { ...payload, ...secondPayload });
     });
 
-    it('Should update object', () => {
+    it("Should update object", () => {
         storage.reset();
         storage.set(payload);
         assert.deepEqual(storage.get(), payload);
@@ -70,42 +70,42 @@ describe('Set Storage', () => {
         storage.set(replacepayload);
         assert.deepEqual(storage.get(), {
             ...replacepayload,
-            ...secondPayload
+            ...secondPayload,
         });
         storage.reset();
         assert.deepEqual(storage.get(), {});
     });
 
-    it('Should update deep object', () => {
+    it("Should update deep object", () => {
         const deepObject = {
             user: {
-                surname: 'Toinane',
+                surname: "Toinane",
                 profile: {
-                    id: 24
-                }
-            }
+                    id: 24,
+                },
+            },
         };
 
         const deepNewObject = {
             user: {
                 profile: {
-                    isOnline: true
+                    isOnline: true,
                 },
-                group: ['admin']
+                group: ["admin"],
             },
-            settings: true
+            settings: true,
         };
 
         const deepResultObject = {
             user: {
-                surname: 'Toinane',
+                surname: "Toinane",
                 profile: {
                     id: 24,
-                    isOnline: true
+                    isOnline: true,
                 },
-                group: ['admin']
+                group: ["admin"],
             },
-            settings: true
+            settings: true,
         };
 
         storage.set(deepObject);
@@ -114,7 +114,7 @@ describe('Set Storage', () => {
         assert.deepEqual(storage.get(), deepResultObject);
     });
 
-    it('Should retrieve save from file', () => {
+    it("Should retrieve save from file", () => {
         storage.reset();
         storage.set(replacepayload);
 

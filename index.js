@@ -1,13 +1,13 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const electron = require('electron');
+const electron = require("electron");
 
 function deepMergeObject(...objects) {
-    const isObject = obj => obj && typeof obj === 'object';
+    const isObject = (obj) => obj && typeof obj === "object";
 
     return objects.reduce((prev, obj) => {
-        Object.keys(obj).forEach(key => {
+        Object.keys(obj).forEach((key) => {
             const pVal = prev[key];
             const oVal = obj[key];
 
@@ -23,11 +23,14 @@ function deepMergeObject(...objects) {
 }
 
 class ElectronLightStorage {
+    defaultPath;
+    filePath;
+    defaultStore;
+    store;
+
     constructor() {
-        this.defaultPath = (electron.app || electron.remote.app).getPath(
-            'userData'
-        );
-        this.filePath = this.defaultPath + path.sep + 'storage.json';
+        this.defaultPath = electron.app.getPath("userData");
+        this.filePath = this.defaultPath + path.sep + "storage.json";
         this.defaultStore = {};
         this.store = {};
 
@@ -37,30 +40,30 @@ class ElectronLightStorage {
     }
 
     set(updatingStore) {
-        if (typeof updatingStore !== 'object') {
+        if (typeof updatingStore !== "object") {
             throw new TypeError(
-                'Excepted `store` to be of type `object`, got ' +
+                "Excepted `store` to be of type `object`, got " +
                     typeof updatingStore
             );
         }
 
         if (Array.isArray(updatingStore)) {
             throw new TypeError(
-                'Excepted `store` to be of type `object`, got array'
+                "Excepted `store` to be of type `object`, got array"
             );
         }
 
         this.store = deepMergeObject(this.store, updatingStore);
-        fs.writeFileSync(this.filePath, JSON.stringify(this.store), 'utf8');
+        fs.writeFileSync(this.filePath, JSON.stringify(this.store), "utf8");
 
         return this.store;
     }
 
     get(name = undefined) {
-        if (!this.store.length) {
+        if (!Object.keys(this.store).length) {
             if (!fs.existsSync(this.filePath)) this.store = this.defaultStore;
             else
-                this.store = JSON.parse(fs.readFileSync(this.filePath, 'utf8'));
+                this.store = JSON.parse(fs.readFileSync(this.filePath, "utf8"));
         }
 
         if (name) {
